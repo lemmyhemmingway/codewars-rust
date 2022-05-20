@@ -2,6 +2,14 @@
 
 use std::collections::HashMap;
 
+fn positive_sum(slice: &[i32]) -> i32 {
+    slice.into_iter().filter(|x| **x > 0).sum()
+}
+
+fn summation(n: i32) -> i32 {
+    (1..=n).sum()
+}
+
 fn name_shuffler(s: &str) -> String {
     let mut result: Vec<&str> = s.split(" ").collect();
     result.reverse();
@@ -279,5 +287,21 @@ mod tests {
         assert_eq!(name_shuffler("john McClane"), "McClane john");
         assert_eq!(name_shuffler("Mary jeggins"), "jeggins Mary");
         assert_eq!(name_shuffler("tom jerry"), "jerry tom");
+    }
+
+    #[test]
+    fn test_summation() {
+        assert_eq!(summation(1), 1);
+        assert_eq!(summation(8), 36);
+        assert_eq!(summation(22), 253);
+        assert_eq!(summation(100), 5050);
+        assert_eq!(summation(213), 22791);
+    }
+
+    #[test]
+    fn test_positive_sum() {
+        assert_eq!(positive_sum(&[1,2,3,4,5]), 15);
+        assert_eq!(positive_sum(&[1,-2,3,4,5]), 13);
+        assert_eq!(positive_sum(&[-1,2,3,4,-5]), 9);
     }
 }
