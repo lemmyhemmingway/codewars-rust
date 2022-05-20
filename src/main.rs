@@ -1,6 +1,35 @@
 #![allow(dead_code)]
 
 use std::collections::HashMap;
+fn printer_error(s: &str) -> String {
+
+    format!("{}/{}", s.chars().filter(|&c| c > 'm').count(), s.len())
+    
+
+    // my solution
+    // let correct_vector: Vec<char> = ('a'..='m').collect();
+    // let mut correct_count = 0;
+    // for item in s.chars().into_iter() {
+    //     if !correct_vector.contains(&item) {
+    //         correct_count += 1;
+    //     } else {
+    //          continue;
+    //   }
+    // }
+    // format!("{}/{}", correct_count, s.len())
+    
+}
+
+fn find_short(s: &str) -> u32 {
+    let list: Vec<&str>  = s.split(" ").collect();
+    let mut min_length = list[0].len();
+    for item in list {
+        if item.len() < min_length {
+            min_length = item.len();
+        }
+    }
+    min_length as u32
+}
 
 fn positive_sum(slice: &[i32]) -> i32 {
     slice.into_iter().filter(|x| **x > 0).sum()
@@ -174,8 +203,7 @@ fn count_sheep_array(sheep: &[bool]) -> u8 {
     result
 }
 fn main() {
-   let result = name_shuffler("AAA BBB");
-   println!("{}", result);
+    printer_error("aldskfalkdsfjlakdsjfjadsfj");
 }
 
 #[cfg(test)]
@@ -303,5 +331,22 @@ mod tests {
         assert_eq!(positive_sum(&[1,2,3,4,5]), 15);
         assert_eq!(positive_sum(&[1,-2,3,4,5]), 13);
         assert_eq!(positive_sum(&[-1,2,3,4,-5]), 9);
+    }
+
+    #[test]
+    fn test_find_short() {
+      assert_eq!(find_short("bitcoin take over the world maybe who knows perhaps"), 3);
+      assert_eq!(find_short("turns out random test cases are easier than writing out basic ones"), 3);
+      assert_eq!(find_short("lets talk about javascript the best language"), 3);
+      assert_eq!(find_short("i want to travel the world writing code one day"), 1);
+      assert_eq!(find_short("Lets all go on holiday somewhere very cold"), 2);
+      assert_eq!(find_short("Let's travel abroad shall we"), 2);
+    }
+
+    #[test]
+    fn test_printer_error() {
+        assert_eq!(&printer_error("aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbmmmmmmmmmmmmmmmmmmmxyz"), "3/56");
+        assert_eq!(&printer_error("kkkwwwaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbmmmmmmmmmmmmmmmmmmmxyz"), "6/60");
+        assert_eq!(&printer_error("kkkwwwaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbmmmmmmmmmmmmmmmmmmmxyzuuuuu"), "11/65");
     }
 }
