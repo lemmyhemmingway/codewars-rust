@@ -1,6 +1,11 @@
 #![allow(dead_code)]
 
 use std::collections::HashMap;
+
+fn no_space(x : String) -> String{
+    String::new()  
+}
+
 fn find_average(slice: &[f64]) -> f64 {
     match slice.len() {
         0 => 0.,
