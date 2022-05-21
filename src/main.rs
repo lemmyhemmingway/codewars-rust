@@ -1,6 +1,15 @@
 #![allow(dead_code)]
 
 use std::collections::HashMap;
+fn find_average(slice: &[f64]) -> f64 {
+    match slice.len() {
+        0 => 0.,
+        n => slice.iter().sum::<f64>() / n as f64
+    }
+    // my solution
+    // let total: f64 = slice.iter().sum();
+    // total / if slice.len() == 0 { 1.0 as f64 } else { slice.len() as f64 }
+}
 fn printer_error(s: &str) -> String {
 
     format!("{}/{}", s.chars().filter(|&c| c > 'm').count(), s.len())
@@ -203,7 +212,7 @@ fn count_sheep_array(sheep: &[bool]) -> u8 {
     result
 }
 fn main() {
-    printer_error("aldskfalkdsfjlakdsjfjadsfj");
+    find_average(&vec![]);
 }
 
 #[cfg(test)]
@@ -349,4 +358,14 @@ mod tests {
         assert_eq!(&printer_error("kkkwwwaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbmmmmmmmmmmmmmmmmmmmxyz"), "6/60");
         assert_eq!(&printer_error("kkkwwwaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbmmmmmmmmmmmmmmmmmmmxyzuuuuu"), "11/65");
     }
+
+    #[test]
+    fn test_average() {
+        let input = [
+            17.0, 16.0, 16.0, 16.0, 16.0, 15.0, 17.0, 17.0, 15.0, 5.0, 17.0, 17.0, 16.0,
+        ];
+        assert_eq!(find_average(&input), 200.0 / 13.0);
+        assert_eq!(find_average(&[]), 0.0);
+    }
+
 }
