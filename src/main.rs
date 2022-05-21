@@ -2,6 +2,21 @@
 
 use std::collections::HashMap;
 
+fn switch_it_up(n: usize) -> &'static str {
+    match n {
+        1 => "One",
+        2 => "Two",
+        3 => "Three",
+        4 => "Four",
+        5 => "Five",
+        6 => "Six",
+        7 => "Seven",
+        8 => "Eight",
+        9 => "Nine",
+        _ => "Zero",
+    }
+}
+
 fn no_space(x : String) -> String{
     x.split(" ").collect::<String>()
 }
@@ -380,6 +395,13 @@ mod tests {
       assert_eq!("8aaaaaddddr", no_space("8aaaaa dddd r     ".to_string()));
       assert_eq!("jfBmgklf8hg88lbe8", no_space("jfBm  gk lf8hg  88lbe8 ".to_string()));
       assert_eq!("8jaam", no_space("8j aam".to_string()));        
+    }
+
+    #[test]
+    fn test_switch_it_up() {
+        assert_eq!(switch_it_up(1), "One");
+        assert_eq!(switch_it_up(2), "Two");
+        assert_eq!(switch_it_up(3), "Three");
     }
 
 }
