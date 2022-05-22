@@ -2,6 +2,16 @@
 
 use std::collections::HashMap;
 
+fn number(bus_stops:&[(i32,i32)]) -> i32 {
+    let mut get_in = 0;
+    let mut get_off = 0;
+    for stop in bus_stops {
+        get_in += stop.0;
+        get_off += stop.1;
+    }
+    get_in - get_off
+}
+
 fn validate_pin(pin: &str) -> bool {
 
     // pin.chars().all(|c| c.is_digit(10)) && (pin.len() == 4 || pin.len() == 6)
@@ -465,6 +475,13 @@ mod tests {
         assert_eq!(validate_pin("000000"), true);
         assert_eq!(validate_pin("123456"), true);
         assert_eq!(validate_pin("090909"), true);
+    }
+
+    #[test]
+    fn test_bus_stop() {
+      assert_eq!(number(&[(10,0),(3,5),(5,8)]), 5);
+      assert_eq!(number(&[(3,0),(9,1),(4,10),(12,2),(6,1),(7,10)]), 17);
+      assert_eq!(number(&[(3,0),(9,1),(4,8),(12,2),(6,1),(7,8)]), 21);
     }
 
 
