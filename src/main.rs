@@ -3,13 +3,15 @@
 use std::collections::HashMap;
 
 fn number(bus_stops:&[(i32,i32)]) -> i32 {
-    let mut get_in = 0;
-    let mut get_off = 0;
-    for stop in bus_stops {
-        get_in += stop.0;
-        get_off += stop.1;
-    }
-    get_in - get_off
+
+    bus_stops.into_iter().fold(0, |acc,x| acc + x.0 - x.1)
+    // let mut get_in = 0;
+    // let mut get_off = 0;
+    // for stop in bus_stops {
+    //    get_in += stop.0;
+    //    get_off += stop.1;
+    // }
+    // get_in - get_off
 }
 
 fn validate_pin(pin: &str) -> bool {
