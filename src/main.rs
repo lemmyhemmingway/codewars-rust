@@ -2,6 +2,25 @@
 
 use std::collections::HashMap;
 
+fn validate_pin(pin: &str) -> bool {
+
+    // pin.chars().all(|c| c.is_digit(10)) && (pin.len() == 4 || pin.len() == 6)
+
+
+    let is_pin_length_ok = pin.len() == 4 || pin.len() == 6;
+    for c in pin.chars().into_iter() {
+        if !c.is_digit(10) {
+            return false;
+        }
+    }
+    is_pin_length_ok
+}
+
+
+fn dna_to_rna(dna: &str) -> String {
+    dna.replace("T", "U")
+}
+
 fn switch_it_up(n: usize) -> &'static str {
     match n {
         1 => "One",
@@ -403,5 +422,50 @@ mod tests {
         assert_eq!(switch_it_up(2), "Two");
         assert_eq!(switch_it_up(3), "Three");
     }
+    
+    #[test]
+    fn test_dna_to_rna() {
+        assert_eq!(dna_to_rna("TTTT"), String::from("UUUU"));
+    }
+
+    #[test]
+    fn test_validate_pin() {
+        assert_eq!(validate_pin("1234"), true);
+        assert_eq!(validate_pin("1234a"), false);
+        assert_eq!(validate_pin("-123"), false);
+        assert_eq!(validate_pin("+123"), false);
+    }
+
+        #[test]
+    fn test_validate_pin_invalid_length_tests() {
+        assert_eq!(validate_pin("1"), false);
+        assert_eq!(validate_pin("12"), false);
+        assert_eq!(validate_pin("123"), false);
+        assert_eq!(validate_pin("12345"), false);
+        assert_eq!(validate_pin("1234567"), false);
+        assert_eq!(validate_pin("-1234"), false);
+        assert_eq!(validate_pin("1.234"), false);
+        assert_eq!(validate_pin("-1.234"), false);
+        assert_eq!(validate_pin("00000000"), false);
+    }
+    
+    #[test]
+    fn test_validate_pin_non_digit_chars_tests() {
+        assert_eq!(validate_pin("a234"), false);
+        assert_eq!(validate_pin(".234"), false);
+    }
+    
+    #[test]
+    fn test_validate_pin_valid_pin_tests() {
+        assert_eq!(validate_pin("1234"), true);
+        assert_eq!(validate_pin("0000"), true);
+        assert_eq!(validate_pin("1111"), true);
+        assert_eq!(validate_pin("123456"), true);
+        assert_eq!(validate_pin("098765"), true);
+        assert_eq!(validate_pin("000000"), true);
+        assert_eq!(validate_pin("123456"), true);
+        assert_eq!(validate_pin("090909"), true);
+    }
+
 
 }
