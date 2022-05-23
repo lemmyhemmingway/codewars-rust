@@ -2,6 +2,25 @@
 
 use std::collections::HashMap;
 
+fn bin_to_decimal(inp: &str) -> i32 {
+    i32::from_str_radix(inp, 2).unwrap()
+}
+
+fn count_positives_sum_negatives(input: Vec<i32>) -> Vec<i32> {
+    if input.len() < 2 {
+        return Vec::new();
+    }
+    let mut positive = 0;
+    let mut negative = 0;
+    for n in input {
+        match n {
+            n if n > 0 => positive += 1, 
+            _  => negative += n,
+        }
+    }
+    vec![positive, negative]
+}
+
 fn duplicate_encode(word:&str)->String {
     let mut encode = String::new();
     for w in word.to_lowercase().chars() {
@@ -504,6 +523,13 @@ mod tests {
       assert_eq!(duplicate_encode("recede"),"()()()");
       assert_eq!(duplicate_encode("Success"),")())())","should ignore case");
       assert_eq!(duplicate_encode("(( @"),"))((");
+    }
+
+    #[test]
+    fn test_bin_to_decimal() {
+        assert_eq!(bin_to_decimal("0"), 0);
+        assert_eq!(bin_to_decimal("1"), 1);
+        assert_eq!(bin_to_decimal("1001001"), 73);
     }
 
 }
