@@ -2,6 +2,18 @@
 
 use std::collections::HashMap;
 
+fn duplicate_encode(word:&str)->String {
+    let mut encode = String::new();
+    for w in word.to_lowercase().chars() {
+        if word.to_lowercase().matches(w).count() > 1 {
+            encode.push(')');
+        } else {
+            encode.push('(');
+        }
+    }
+    encode
+}
+
 fn number(bus_stops:&[(i32,i32)]) -> i32 {
 
     bus_stops.into_iter().fold(0, |acc,x| acc + x.0 - x.1)
@@ -263,7 +275,7 @@ fn count_sheep_array(sheep: &[bool]) -> u8 {
     result
 }
 fn main() {
-    find_average(&vec![]);
+    println!("Hello world");
 }
 
 #[cfg(test)]
@@ -486,5 +498,12 @@ mod tests {
       assert_eq!(number(&[(3,0),(9,1),(4,8),(12,2),(6,1),(7,8)]), 21);
     }
 
+    #[test]
+    fn test_duplicate_encode() {
+      assert_eq!(duplicate_encode("din"),"(((");
+      assert_eq!(duplicate_encode("recede"),"()()()");
+      assert_eq!(duplicate_encode("Success"),")())())","should ignore case");
+      assert_eq!(duplicate_encode("(( @"),"))((");
+    }
 
 }
