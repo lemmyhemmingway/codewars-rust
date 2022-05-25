@@ -2,6 +2,30 @@
 
 use std::collections::HashMap;
 
+fn quarter_of(month: u8) -> u8 {
+    match month {
+        1..=3 => 1,
+        4..=6 => 2,
+        7..=9 => 3,
+        10..=12 => 4,
+        _ => 0,
+    }
+}
+
+fn row_weights(array: Vec<u32>) -> (u32, u32) {
+    let mut first_team = 0;
+    let mut second_team = 0;
+
+    for (i, n) in array.into_iter().enumerate() {
+        if i % 2 == 0 {
+            first_team += n;
+        } else {
+            second_team += n;
+        }
+    }
+    (first_team, second_team)
+}
+
 fn multi_table(n: u64) -> String {
     let mut multi_table_string = String::new();
     for i in 1..=10 {
@@ -545,6 +569,12 @@ mod tests {
     fn test_multi_table() {
         assert_eq!(multi_table(5), "1 * 5 = 5\n2 * 5 = 10\n3 * 5 = 15\n4 * 5 = 20\n5 * 5 = 25\n6 * 5 = 30\n7 * 5 = 35\n8 * 5 = 40\n9 * 5 = 45\n10 * 5 = 50");
         assert_eq!(multi_table(1), "1 * 1 = 1\n2 * 1 = 2\n3 * 1 = 3\n4 * 1 = 4\n5 * 1 = 5\n6 * 1 = 6\n7 * 1 = 7\n8 * 1 = 8\n9 * 1 = 9\n10 * 1 = 10");
+    }
+    #[test]
+    fn test_row_weights() {
+      assert_eq!(row_weights(vec![13, 27, 49]), (62, 27));
+      assert_eq!(row_weights(vec![50, 60, 70, 80]), (120, 140));
+      assert_eq!(row_weights(vec![80]), (80,0));
     }
 
 }
