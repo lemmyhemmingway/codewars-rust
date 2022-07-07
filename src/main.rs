@@ -2,6 +2,10 @@
 
 use std::collections::HashMap;
 
+fn square(num: i32) -> i32 {
+    num * num
+}
+
 fn quarter_of(month: u8) -> u8 {
     match month {
         1..=3 => 1,
@@ -575,6 +579,15 @@ mod tests {
       assert_eq!(row_weights(vec![13, 27, 49]), (62, 27));
       assert_eq!(row_weights(vec![50, 60, 70, 80]), (120, 140));
       assert_eq!(row_weights(vec![80]), (80,0));
+    }
+
+    #[test]
+    fn test_square() {
+        assert_eq!(square(1), 1, "expected 1 squared to be 1");
+        assert_eq!(square(2), 4, "expected 2 squared to be 4");
+        assert_eq!(square(3), 9, "expected 3 squared to be 9");
+        assert_eq!(square(4), 16, "expected 4 squared to be 15");
+        assert_eq!(square(5), 25, "expected 5 squared to be 25");
     }
 
 }
